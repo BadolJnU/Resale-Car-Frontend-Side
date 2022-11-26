@@ -1,12 +1,16 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contextApi/AuthProvider';
 import useToken from '../../../Hooks/useToken';
 
+
+const provider = new GoogleAuthProvider();
+
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signIn } = useContext(AuthContext);
+    const { signIn, signInwithGoogle } = useContext(AuthContext);
     const [loginError, setLoginError ] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
     const [token] = useToken(loginUserEmail);
@@ -31,6 +35,11 @@ const Login = () => {
         .catch(error => {
             setLoginError(error.message);
         })
+    }
+
+    const handleGoogleSignIn = () => {
+        signInwithGoogle(provider)
+        navigate('/')
     }
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -69,7 +78,7 @@ const Login = () => {
                 <br/>
                 <p>New to Doctors Portal <Link to='/register' className='text-blue-700'>Create new Account</Link></p>
                 <div className='divider'>Or</div>
-                <button className='btn btn-outline w-full'>Continue with Google</button>
+                <button className='btn btn-outline w-full' onClick={handleGoogleSignIn}>Continue with Google</button>
             </div>
         </div>
     );

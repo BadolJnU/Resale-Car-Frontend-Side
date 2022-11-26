@@ -5,10 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useToken from '../../../Hooks/useToken';
 import { AuthContext } from '../../../contextApi/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
+
+const provider = new GoogleAuthProvider();
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser, signInwithGoogle } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [createUserEmail, setCreateUserEmail] = useState('');
     const [token] = useToken(createUserEmail)
@@ -34,6 +37,11 @@ const Register = () => {
             .catch(error => console.log(error))
         })
         .catch(error => setSignUpError(error.message));
+    }
+
+    const handleGoogleSignIn = () => {
+        signInwithGoogle(provider)
+        navigate('/')
     }
 
     const saveUser = (email, name, role) => {
@@ -106,7 +114,7 @@ const Register = () => {
                 <br/>
                 <p>Already have an account in Doctors Portal <Link to='/login' className='text-blue-700'>Login</Link></p>
                 <div className='divider'>Or</div>
-                <button className='btn btn-outline w-full'>Continue with Google</button>
+                <button className='btn btn-outline w-full' onClick={handleGoogleSignIn}>Continue with Google</button>
             </div>
         </div>
     );
