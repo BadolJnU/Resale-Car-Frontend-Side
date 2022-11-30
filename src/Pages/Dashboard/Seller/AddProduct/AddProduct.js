@@ -43,10 +43,11 @@ const AddProduct = () => {
                         description: data.description,
                         buyingPrice: data.b_price,
                         sellingPrice: data.s_price,
-                        category: data.category,
+                        category: data.categoryName,
                         image: imgData.data.url,
                         time: Date().toLocaleString()
                     }
+                    console.log(product)
 
                     // save doctor information to the database
                     fetch('http://localhost:5000/addProduct', {
@@ -61,7 +62,7 @@ const AddProduct = () => {
                         .then(result => {
                             console.log(result);
                             toast.success(`${data.name} is added successfully`);
-                            navigate('/')
+                            //navigate('/')
                         })
                 }
             })
@@ -149,7 +150,7 @@ const AddProduct = () => {
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Category</span></label>
                         <select
-                            {...register('category')}
+                            {...register('categoryName')}
                             className="select input-bordered w-full max-w-xs">
                             {
                                 categories.map(category => <option
