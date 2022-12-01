@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import './ProductDetails.css'
 
 const ProductDetails = ({product}) => {
+    function formatTime (time) {
+        return time.toString().slice(0, 24);
+    }
     const {name, location, used, running, condition, description, buyingPrice, sellingPrice, image, time, email, userName} = product
     return (
         <div className="row mt-5 container mx-auto">
@@ -14,7 +17,7 @@ const ProductDetails = ({product}) => {
                         </div>
                         <div className="preview-card__content">
                             <div>Posted by: {userName}</div>
-                            <div>Posted on: {time}</div>
+                            <div>Posted on: {formatTime(time)}</div>
                             <div className="preview-card__title">{name}</div>
                             <div>
                                 <p className='font-semibold'>Condition: {condition}</p>
