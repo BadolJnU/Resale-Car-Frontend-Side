@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../contextApi/AuthProvider';
 
 const AddProduct = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const {user} = useContext(AuthContext);
+    console.log(user);
     const [addProductError, setaddProductError] = useState('');
     const imageHostKey = "bf5aa6d374778e1de5b7592aee5336d6";
     console.log(imageHostKey)
@@ -45,7 +48,10 @@ const AddProduct = () => {
                         sellingPrice: data.s_price,
                         category: data.categoryName,
                         image: imgData.data.url,
-                        time: Date().toLocaleString()
+                        time: Date().toLocaleString(),
+                        email: user.email,
+                        userName: user.displayName
+
                     }
                     console.log(product)
 

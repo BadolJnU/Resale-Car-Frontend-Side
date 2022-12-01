@@ -4,6 +4,7 @@ import Main from "../../Layout/Main/Main"
 import AllBuyer from "../../Pages/Dashboard/Buyer/AllBuyer/AllBuyer"
 import AddProduct from "../../Pages/Dashboard/Seller/AddProduct/AddProduct"
 import AllSeller from "../../Pages/Dashboard/Seller/AllSeller/AllSeller"
+import MyProducts from "../../Pages/Dashboard/Seller/MyProducts/MyProducts"
 import Home from "../../Pages/Home/Home/Home"
 import Products from "../../Pages/Products/Products"
 import Login from "../../Pages/Shared/Login/Login"
@@ -45,11 +46,15 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/allBuyer',
                 element: <AllBuyer></AllBuyer>
+            },
+            {
+                path: '/dashboard/addProduct',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/myProducts',
+                element: <MyProducts></MyProducts>
             }
         ]
-    },
-    {
-        path: '/addProduct',
-        element: <AddProduct></AddProduct>
     }
 ])

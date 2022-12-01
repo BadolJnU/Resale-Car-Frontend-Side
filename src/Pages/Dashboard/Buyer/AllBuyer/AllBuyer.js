@@ -35,7 +35,7 @@ const handleDelete = (buyer) => {
     }
   }
     return (
-        <div>
+      <div>
       <div className="overflow-x-auto my-10 mx-10">
         <table className="table w-full">
 
