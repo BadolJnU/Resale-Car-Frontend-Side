@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contextApi/AuthProvider';
 import './ProductDetails.css'
 
@@ -9,7 +8,7 @@ const ProductDetails = ({product}) => {
     function formatTime (time) {
         return time.toString().slice(0, 24);
     }
-    const {_id, name, location, used, running, condition, description, buyingPrice, sellingPrice, image, time, email, userName} = product;
+    const { name, used, running, condition, description, buyingPrice, sellingPrice, image, time,  userName} = product;
 
     const handleBooking = (event) => {
         event.preventDefault();
@@ -28,7 +27,7 @@ const ProductDetails = ({product}) => {
             mobileNumber,
             location
         }
-        fetch('http://localhost:5000/booking', {
+        fetch('https://server-side-flame.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

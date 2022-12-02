@@ -4,6 +4,8 @@ import Footer from '../../Component/Footer/Footer';
 import Navbar from '../../Component/Navbar/Navbar';
 
 const DashboardLayout = () => {
+
+
     return (
         <div>
             <Navbar></Navbar>
@@ -20,6 +22,7 @@ const DashboardLayout = () => {
                         <li><Link to='/dashboard/allBuyer'>All Buyer</Link></li>
                         <li><Link to='/dashboard/addProduct'>Add Product</Link></li>
                         <li><Link to='/dashboard/myProducts'>My Product</Link></li>
+                        <li><Link to='/dashboard/bookingProduct'>My Orders</Link></li>
                         
                     </ul>
 

@@ -5,7 +5,7 @@ import { AuthContext } from '../../../../contextApi/AuthProvider';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/products?email=${user?.email}`;
+    const url = `https://server-side-flame.vercel.app/products?email=${user?.email}`;
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['email', user?.email],
         queryFn: async () => {
@@ -26,7 +26,7 @@ const MyProducts = () => {
     const handleDelete = (product) => {
         const agree = window.confirm(`Are you sure you want to delete: ${product.name}`);
         if (agree) {
-            fetch(`http://localhost:5000/products/${product._id}`, {
+            fetch(`https://server-side-flame.vercel.app/products/${product._id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -42,7 +42,7 @@ const MyProducts = () => {
     const handleAdvertise = (product) => {
         const agree = window.confirm(`Are you sure you want to advertise: ${product.name}`);
         if (agree) {
-            fetch(`http://localhost:5000/products/advertise/${product._id}`, {
+            fetch(`https://server-side-flame.vercel.app/products/advertise/${product._id}`, {
                 method: 'PUT',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -61,7 +61,7 @@ const MyProducts = () => {
     const handleRemoveAdvertise = (product) => {
         const agree = window.confirm(`Are you sure you want to remove advertise: ${product.name}`);
         if (agree) {
-            fetch(`http://localhost:5000/products/removeAdvertise/${product._id}`, {
+            fetch(`https://server-side-flame.vercel.app/products/removeAdvertise/${product._id}`, {
                 method: 'PUT',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const AllBuyer = () => {
     const [remainingBuyer, setBuyer] = useState([])
-    const url = `http://localhost:5000/allSellers?role=Buyer`;
+    const url = `https://server-side-flame.vercel.app/allSellers?role=Buyer`;
   const {data: buyers = []} = useQuery({
     queryKey: ['role', 'buyer'],
     queryFn: async() => {
@@ -21,7 +21,7 @@ const AllBuyer = () => {
 const handleDelete = (buyer) => {
     const agree = window.confirm(`Are you sure you want to delete: ${buyer.name}`);
     if(agree){
-      fetch(`http://localhost:5000/user/${buyer._id}`, {
+      fetch(`https://server-side-flame.vercel.app/user/${buyer._id}`, {
         method: 'DELETE'
       })
       .then(res => res.json())

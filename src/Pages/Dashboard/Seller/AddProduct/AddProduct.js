@@ -18,7 +18,7 @@ const AddProduct = () => {
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://server-side-flame.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -56,7 +56,7 @@ const AddProduct = () => {
                     console.log(product)
 
                     // save doctor information to the database
-                    fetch('http://localhost:5000/addProduct', {
+                    fetch('https://server-side-flame.vercel.app/addProduct', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

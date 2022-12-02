@@ -47,7 +47,7 @@ const Register = () => {
     const saveUser = (email, name, role) => {
         const savingUser = {email, name, role};
         console.log(savingUser)
-        fetch('http://localhost:5000/user', {
+        fetch('https://server-side-flame.vercel.app/user', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

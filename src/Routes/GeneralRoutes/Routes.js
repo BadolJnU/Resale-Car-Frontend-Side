@@ -3,6 +3,7 @@ import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout"
 import Main from "../../Layout/Main/Main"
 import Blog from "../../Pages/Blog/Blog"
 import AllBuyer from "../../Pages/Dashboard/Buyer/AllBuyer/AllBuyer"
+import BookingProduct from "../../Pages/Dashboard/Buyer/BookingProduct/BookingProduct"
 import AddProduct from "../../Pages/Dashboard/Seller/AddProduct/AddProduct"
 import AllSeller from "../../Pages/Dashboard/Seller/AllSeller/AllSeller"
 import MyProducts from "../../Pages/Dashboard/Seller/MyProducts/MyProducts"
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/categories')
+                loader: () => fetch('https://server-side-flame.vercel.app/categories')
             },
             {
                 path: '/login',
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
             {
                 path: '/products/:id',
                 element: <Products></Products>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({params}) => fetch(`https://server-side-flame.vercel.app/products/${params.id}`)
             },
             {
                 path: '/blogs',
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myProducts',
                 element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/bookingProduct',
+                element: <BookingProduct></BookingProduct>
             }
         ]
     },
