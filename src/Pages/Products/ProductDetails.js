@@ -1,12 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contextApi/AuthProvider';
 import './ProductDetails.css'
 
 const ProductDetails = ({product}) => {
+    const {user} = useContext(AuthContext);
     function formatTime (time) {
         return time.toString().slice(0, 24);
     }
-    const {name, location, used, running, condition, description, buyingPrice, sellingPrice, image, time, email, userName} = product
+    const {_id, name, location, used, running, condition, description, buyingPrice, sellingPrice, image, time, email, userName} = product;
+
+    const handleBooking = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const userName = form.userName.value;
+        const email = form.email.value;
+        const productName = form.name.value;
+        const price = form.sellingPrice.value;
+        const mobileNumber = form.phoneNumber.value;
+        const location = form.location.value;
+        const bookingProduct = {
+            userName,
+            email,
+            productName,
+            price,
+            mobileNumber,
+            location
+        }
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingProduct)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.acknowledged){
+                toast.success('Booking Confiremd');
+            }
+            else {
+                toast.error(data.message);
+            }
+        })
+    }
     return (
         <div className="row mt-5 container mx-auto">
             <div className="preview-card">
@@ -31,10 +69,27 @@ const ProductDetails = ({product}) => {
                             {description.length > 300 ?
                                 <p>{description.slice(0, 300) + '....'} </p>
                                 : <p>{description}</p>}
-                            <Link to='/' className="preview-card__button btn-outline btn-primary">Book Now</Link>
+                            <label htmlFor="bookingModal" className="preview-card__button btn-outline btn-primary">Book Now</label>
                         </div>
                     </div>
 
+                </div>
+            </div>
+            <input type="checkbox" id="bookingModal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box relative">
+                    <label htmlFor="bookingModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <h3 className="text-xl font-bold text-center">Booking</h3>
+                    <form className='grid grid-cols-1 gap-3 mt-10' onSubmit={handleBooking}>
+                        <input type="text" name='userName' defaultValue={user?.displayName} disabled placeholder="Type here Name" className="input input-bordered w-full" />
+                        <input type="text" name='email' defaultValue={user?.email} disabled placeholder="Type here Name" className="input input-bordered w-full" />
+                        <input type="text" name='name' defaultValue={name} disabled placeholder="Type here Name" className="input input-bordered w-full" />
+                        <input type="text" name='sellingPrice' defaultValue={sellingPrice} disabled placeholder="Type here Name" className="input input-bordered w-full" />
+                        <input type="text" name='phoneNumber' placeholder="Type here Mobile Number" className="input input-bordered w-full" />
+                        <input type="text" name='location' placeholder="Type here meeting location" className="input input-bordered w-full" />
+                        <br/>
+                        <input type="submit" value="Submit" className="input input-bordered w-full btn btn-outline btn-primary" />
+                    </form>
                 </div>
             </div>
 
